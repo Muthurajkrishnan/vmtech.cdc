@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<style type="text/css">
+a:active {
+	COLOR: black;
+	TEXT-DECORATION: none
+}
+
+a:hover {
+	COLOR: blue;
+	TEXT-DECORATION: none;
+	font-weight: none
+}
+</style>
+<body id="page-top" data-offset="50">
+	<div id="wrapper" class="row-fluid">
+		<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
+			style="margin-bottom: 0px;">
+			<div class="container-fluid">
+				<div class="navbar-header page-scroll">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#homeMenu">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#anyHome" data-toggle="tab"
+						id="homeMenu" prevent-default="" scroll-to="anyHome"
+						ng-click="home()">CDC</a>
+				</div>
+				<div class="collapse navbar-collapse" id="homeMenu">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#anyHome" data-toggle="tab"
+							id="homeMenu" prevent-default="" scroll-to="anyHome"
+							ng-click="home()">Home</a></li>
+						<li><a href="#vendorHome" data-toggle="tab" id="homeMenu"
+							prevent-default="" scroll-to="vendorHome">Exclusives</a></li>
+						<li class="dropdown"><a href="" class="dropdown-toggle"
+							data-toggle="dropdown">Categories<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu"
+								style="background-color: #008081; padding: 0px;">
+								<li><a href="#electronics" data-toggle="tab" id="homeMenu"
+									prevent-default="" scroll-to="electronics" ng-click="home()"
+									style="color: white;">Electronics</a></li>
+								<li class="divider"></li>
+								<li><a href="#furnitures" data-toggle="tab" id="homeMenu"
+									prevent-default="" scroll-to="furnitures" ng-click="home()"
+									style="color: white;">Furnitures</a></li>
+								<li class="divider"></li>
+								<li><a href="" ng-click="home()" style="color: white;">Automobiles</a></li>
+								<li class="divider"></li>
+								<li><a href="#services" data-toggle="tab" id="homeMenu"
+									prevent-default="" scroll-to="services" ng-click="home()"
+									style="color: white;">Services</a></li>
+								<li class="divider"></li>
+								<li><a href="" ng-click="home()" style="color: white;">Health</a></li>
+							</ul></li>
+					</ul>
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
+						<li><a role="button" href="#showConsumerCart"
+							data-toggle="tab" id="homeMenu" prevent-default=""
+							scroll-to="showConsumerCart" data-target="#showConsumerCart"
+							ng-click="consumerCart()"><i class="fa fa-shopping-cart"></i>
+								<span class="badge">{{cartCount}}</span></a></li>
+						<li ng-show="loginCheck == 0"><a href="#signup" role="button"
+							data-toggle="modal" data-target="#signup"><span
+								class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+						<li ng-show="loginCheck == 0"><a href="#login"
+							data-toggle="modal" role="button" data-target="#login"><span
+								class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						<li ng-show="loginCheck == 1" class="class="dropdown""><a
+							href="" role="button" class="dropdown-toggle"
+							data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
+								Welcome {{userName}}<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu"
+								style="background-color: #008081">
+								<li><a href="" ng-click="profile()" style="color: white;">Profile</a></li>
+								<li class="divider"></li>
+								<li><a href="" ng-click="myQuotes()" style="color: white;">MyQuotes</a></li>
+								<li class="divider"></li>
+								<li><a href="" ng-click="myOrders()" style="color: white;">MyOrders</a></li>
+								<li class="divider"></li>
+								<li><a href="" ng-click="logout()" style="color: white;">Logout</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div id="scroller" scroll-spy="" data-target="#navPills"
+		ng-show="scroll == 1" data-scroll-offset="82"
+		style="font-family: Lato; height: 100%">
+		<div id="anyHome" style="padding-top: 0px; padding-left: 0px;">
+			<div ng-include="'views/anyHome.html'"></div>
+		</div>
+		<div id="electronics" style="padding-top: 0px;">
+			<div ng-include="'views/electronics.html'"></div>
+		</div>
+		<div id="furnitures" style="padding-top: 0px;">
+			<div ng-include="'views/furnitures.html'"></div>
+		</div>
+		<div id="services" style="padding-top: 0px;">
+			<div ng-include="'views/services.html'"></div>
+		</div>
+	</div>
+
+	<!---------------------------------------------  ELECTRONICS PRODUCTS CATALOG ----------------------------------------->
+	<div id="scroller" scroll-spy="" ng-show="products == 1" 
+		data-scroll-offset="82" style="font-family: Lato; margin-top: 50px;">
+		<div id="showelectronic" ng-show="showelectronics == 1">
+			<div ng-include="'views/electronicsCatalog.html'"></div>
+		</div>
+	</div>
+	<div id="scroller" scroll-spy="" ng-show="products == 1"
+		data-scroll-offset="82" style="font-family: Lato; margin-top: 50px;">
+		<div id="showFurniture" ng-show="showFurnitures == 1">
+			<div ng-include="'views/furnituresCatalog.html'"></div>
+		</div>
+	</div>
+	<div id="scroller" scroll-spy="" ng-show="products == 1"
+		data-scroll-offset="82" style="font-family: Lato; margin-top: 50px;">
+		<div id="showService" ng-show="showServices == 1">
+			<div ng-include="'views/servicesCatalog.html'"></div>
+		</div>
+	</div>
+	<div id="scroller" scroll-spy="" ng-show="showConsumerCart == 1"
+		data-scroll-offset="82" style="font-family: Lato; ">
+		<div id="showConsumerCart" ng-show="showConsumerCart == 1"
+			style="padding-left: 0px; height: 100%">
+			<div ng-include="'views/ConsumerCart.html'" style="height: 100%" ></div>
+		</div>
+	</div>
+	<!---------------------------------------------  FOOTER ----------------------------------------->
+	<div>
+		<div ng-include="'views/footer.html'"></div>
+	</div>
+</body>

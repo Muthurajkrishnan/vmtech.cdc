@@ -1,0 +1,27 @@
+<div class="row"
+	style="background-image: url('images/focusBG.jpg'); background-size: cover; width: 100%; height: 100%; margin: 0px;">
+	<div class="row"
+		style="height: 100%; padding-top: 10%; padding-left: 5%; margin: 0px;">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 pull-center" style="text-align: center;">
+			<h2>Welcome to Consumer Driven commerce!! Wassup today..</h2>
+			<label style="color: red">{{searchMessage}}</label>
+			<input type="text" class="form-control" id="input.suggest" list="input.suggest-datalist" placeholder="Eg: I would like to buy a mobile, car, clothing"><br>
+			<button type="submit" class="btn btn-lg btn-custom-red"
+				ng-click="shopIt()">Shop!!</button>
+			<datalist id="input.suggest-datalist">
+				<option value="I would like to shop Gadgets">
+				<option value="I would like to shop Furnitures">
+				<option value="I would like to shop Car Accessories">
+				<option value="I would like to shop Bike Accessories">
+				<option value="I would like to shop Baby Products">
+				<option value="I would like to shop Beauty Products">
+				<option value="I would like to shop Clothing and Accessories">
+				<option value="I would like to shop Health and Personal care">
+			</datalist>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+
+
+</div>

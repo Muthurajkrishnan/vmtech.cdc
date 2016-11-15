@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "spring.data.mongodb",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.boot.config.PersistenceConfiguration",
+      "sourceMethod": "mongoDBdataSource()"
+    },
+    {
+      "name": "spring.datasource",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.boot.config.PersistenceConfiguration",
+      "sourceMethod": "dataSource()"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

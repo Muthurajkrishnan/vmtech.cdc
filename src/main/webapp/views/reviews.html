@@ -1,0 +1,120 @@
+
+<div id="reviewsList" class="row"
+	style="background-color: #f5f5f5; padding-left: 20px; padding-right: 20px; height: 100%; font-family: Helvetica, Arial, serif, Lato; background-image: url('images/pay1.png')">
+	<div class="col-md-12 ReviewsImageDiv" ng-init="getOrders()">
+		<!-- ng-controller="productController" -->
+		<!-- <button class="btn btn-lg btn-info ReviewsImageDivChild"
+			role="button" ng-click="getOrders()">Reviews For 
+			Orders</button> -->
+
+		<table id="order" ng-show="orderCount > 0"
+			class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th style="width: 20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Product
+						Info</th>
+					<th style="width: 15%">Product Description</th>
+					<th style="width: 15%">Product Name</th>
+					<th style="width: 10%">Rating</th>
+					<th style="width: 15%">Comments</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="elements in orderAllList" style="line-height: 10%">
+					<td>
+						<div class="row">
+							<img ng-src="images/{{elements.product.productImage}}"
+								width="60%" height="60%" alt="..."
+								class="img-responsive img-rounded" />
+						</div>
+					</td>
+					<td data-th="productName">{{elements.product.productDescription}}
+					</td>
+					<td data-th="productName">{{elements.product.productName}}</td>
+					<td>
+						<div class="row" ng-if="elements.rating == 0">
+							<div class="col-sm-8">
+								<label></label>
+							</div>
+						</div>
+						<div class="row" ng-if="elements.rating != 0">
+							<div class="col-sm-8">
+								<label>{{elements.rating}}</label>
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="row">
+							<div class="col-sm-8" ng-show="elements.reviewcomments != null">
+								<label>{{elements.reviewcomments}}</label>
+							</div>
+							<div class="col-sm-8" ng-show="elements.reviewcomments == null">
+								<button class="btn btn-info btn-xs" role="button"
+									data-toggle="modal"
+									data-target="#reviewModal_{{elements.reviewId}}"
+									ng-model="elements.reviewId">Enter Reviews</button>
+								<div class="modal fade" id="reviewModal_{{elements.reviewId}}"
+									role="dialog">
+									<div class="modal-dialog">
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header"
+												style="background-color: #53657d; color: white;">
+												<div class="row">
+													<div class="col-md-12">
+														<label class="pull-center">Please rate the product
+															and provide comments</label>
+													</div>
+												</div>
+											</div>
+											<div class="modal-body"
+												style="background-color: #53657d; color: white;">
+												<div class="row">
+													<div class="col-md-4">
+														<label class="control-label">Rate</label>
+														<div ng-init="rating = star.rating + 1"></div>
+
+														<div class="star-rating" star-rating rating-value="rating"
+															data-max="5" on-rating-selected=""></div>
+													</div>
+													<div class="col-md-4">
+														<label class="control-label">Title</label><select
+															required="required" ng-model="parent.reviewtitle"
+															style="color: black" class="form-control">
+															<option>Amazing</option>
+															<option>Very Good</option>
+															<option>Good</option>
+															<option>Average</option>
+															<option>Bad</option>
+														</select>
+
+													</div>
+													<div class="col-md-8">
+														<label class="control-label">Comments</label>
+														<textarea class="form-control" rows="5"
+															required="required" ng-model="parent.reviewcomments"> </textarea>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer"
+												style="background-color: white; border-radius: 0px 0px 10px 10px;">
+												<div class="row">
+													<button class="btn btn-md btn-info"
+														ng-click="updateReviews(elements.reviewId, rating)"
+														data-dismiss="modal">Submit</button>
+													&nbsp;
+													<button class="btn btn-md btn-info" data-dismiss="modal">Cancel</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+

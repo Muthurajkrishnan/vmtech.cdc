@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<body id="page-top" data-offset="50">
+	<div id="wrapper" class="row-fluid">
+		<nav class="navbar navbar-default navbar-fixed-top" 
+			style="margin-bottom: 0px; color: white;">
+			<div class="container-fluid" style="height: 90%; background-color: #232f3e">
+				<div class="navbar-header page-scroll">
+					<button type="button" id="nav-toggle-button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#homeMenu">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar" style="background-color: white"></span> <span class="icon-bar" style="background-color: white"></span> <span
+							class="icon-bar" style="background-color: white"></span> <span class="icon-bar" style="background-color: white"></span>
+					</button>
+					<a class="navbar-brand" href="#vendorHome" data-toggle="tab"
+						id="homeMenu" prevent-default="" scroll-to="vendorHome"
+						ng-click="vendorHome()">CDC</a>
+				</div>
+				<div class="collapse navbar-collapse" id="homeMenu">
+					<ul class="nav navbar-nav" style="padding: 0px;">
+						<li class="active"><a href="#vendorHome" data-toggle="tab"
+							id="homeMenu" prevent-default="" scroll-to="vendorHome"
+							ng-click="vendorHome()">Home</a></li>
+						<li><a href="#vendorProducts" data-toggle="tab" id="homeMenu"
+							prevent-default="" scroll-to="vendorProducts"
+							ng-click="showVendorProducts()">Products</a></li>
+						<li><a href="#vendorHome" data-toggle="tab" id="homeMenu"
+							prevent-default="" scroll-to="vendorHome" ng-click="vendorHome()">Quotes</a></li>
+						<li><a href="#vendorOrders" data-toggle="tab" id="homeMenu"
+							prevent-default="" scroll-to="vendorOrders"
+							ng-click="vendorOrders()">Orders</a></li>
+					</ul>
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
+						<li ng-show="loginCheck == 1" class="class="dropdown""><a
+							href="" role="button" class="dropdown-toggle"
+							data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
+								Welcome {{userName}}<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu"
+								style="background-color: #232f3e">
+								<li><a href="#showVendorProfile" data-toggle="tab" id="homeMenu"
+									prevent-default="" scroll-to="showVendorProfile"
+									ng-click="getVendorProfile(); showVendorProfile = 1" style="color: white" >Profile</a></li>
+								<li class="divider"></li>
+								<li><a href="" ng-click="logout()" style="color: white">Logout</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div id="scroller" scroll-spy="" data-target="#navPills"
+		ng-show="scroll == 1" data-scroll-offset="82"
+		style="font-family: Lato; height: 100%">
+		<div id="vendorHome" ng-show="showVendorHome == 1"
+			style="padding-top: 50px; padding-left: 0px; height: 100%">
+			<div ng-include="'views/vendorCart.html'" style="height: 100%"></div>
+		</div>
+		<div id="vendorOrders" ng-show="showVendorOrders == 1"
+			style="padding-top: 50px; padding-left: 0px; height: 100%">
+			<div ng-include="'views/vendorOrders.html'" style="height: 100%"></div>
+		</div>
+		<div id="vendorProducts" ng-show="showVendorProducts == 1"
+			style="padding-top: 50px; padding-left: 0px; height: 100%">
+			<div ng-include="'views/vendorProducts.html'" style="height: 100%"></div>
+		</div>
+
+	</div>
+	<div id="scroller" scroll-spy="" ng-show="showVendorProfile == 1"
+		data-scroll-offset="82" style="font-family: Lato; height: 100%">
+		<div id="showVendorProfile" ng-show="showVendorProfile == 1"
+			style="padding-left: 0px; height: 100%">
+			<div ng-include="'views/profile.html'" style="height: 100%"></div>
+		</div>
+	</div>
+
+
+	<!---------------------------------------------  FOOTER ----------------------------------------->
+	<div>
+		<div ng-include="'views/footer.html'"></div>
+	</div>
+</body>

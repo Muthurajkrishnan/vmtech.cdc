@@ -1,0 +1,120 @@
+<div
+	style="padding-left: 100px; padding-right: 20px; height: 100%; font-family: Helvetica, Arial, serif, Lato; background-image: url('images/pay1.png')">
+	<br />
+	<div class="row">
+		<div class="col-md-4">
+			<input type="checkbox" checked="checked"> <b>Deliver to
+				this address</b><br /> {{profileData.userName}}<br />
+			{{profileData.userAddressOne}}<br /> {{profileData.userAddressTwo}}<br />
+			{{profileData.userCity}}<br /> {{profileData.userState}} -
+			{{zipCode}}<br /> {{profileData.userCountry}}<br />
+		</div>
+		<div class="col-md-2">
+			<input type="checkbox" ng-model="newAddress" ng-click="checked = 1;">
+			<b>Add a new address</b><br />
+		</div>
+		<div class="col-md-6">
+
+			<div class="col-md-4" ng-if="newAddress == 1">
+				<label class="control-label">Address #1</label> <input type="text"
+					class="form-control" style="font-size: 10px;"> <label
+					class="control-label">City</label> <input type="text"
+					class="form-control"> <label class="control-label">Country</label>
+				<input type="text" class="form-control">
+			</div>
+			<div class="col-md-4" ng-if="newAddress == 1">
+				<label class="control-label">Address #2</label> <input type="text"
+					class="form-control"> <label class="control-label">State</label>
+				<input type="text" class="form-control"> <label
+					class="control-label">Zipcode</label> <input type="text"
+					class="form-control">
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<table id="tableForAll" class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th style="width: 20%">Product</th>
+					<th style="width: 10%">Price</th>
+					<th style="width: 10%">Quantity</th>
+					<th style="width: 12%">Vendor</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td data-th="Product">
+						<div class="row">
+							<div class="col-sm-4 hidden-xs">
+								<img ng-src="images/{{productInfo.product.productImage}}"
+									width="100%" height="100%" alt="..."
+									class="img-responsive img-rounded" />
+							</div>
+							<div class="col-sm-8">
+								<h4 class="nomargin">{{productInfo.consumerPriceID}}</h4>
+								<p>{{productInfo.product.productDescription}}</p>
+							</div>
+						</div>
+					</td>
+					<td data-th="Price"><input type="text"
+						ng-model="elements.userPrice" class="form-control"
+						ng-if="editPrice == true"> <span
+						ng-if="editPrice == false"><i class=" fa fa-inr"> </i>
+							{{productInfo.userPrice}}</span></td>
+					<td data-th="Quantity"><input type="text"
+						ng-model="elements.productQuantity" class="form-control"
+						ng-if="editPrice == true"> <span
+						ng-if="editPrice == false">{{productInfo.productQuantity}}</span></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<hr>
+		<div style="margin-left: 75%;">
+			<label>Total Price : </label> <i class=" fa fa-inr"> </i>
+			{{productInfo.userPrice}}
+		</div>
+	</div>
+	<hr style="">
+	<div class="row">
+		<div class="col-md-3">
+			<label class="control-label">Enter your card details</label>
+			<div class="input-group">
+				<span class="input-group-addon"><i
+					class="fa fa-credit-card fa" aria-hidden="true"></i></span> <input
+					type="text" class="form-control" required="required"
+					ng-model="cardInfo">
+			</div>
+		</div>
+		<div class="col-md-2">
+			<label class="control-label">Card Expiry Month</label> <select
+				class="form-control"><option>MM</option>
+				<option>JAN</option>
+				<option>FEB</option>
+				<option>MAR</option>
+				<option>APR</option></select>
+		</div>
+		<div class="col-md-2">
+			<label class="control-label">Card Expiry Year</label> <select
+				class="form-control"><option>YY</option>
+				<option>2016</option>
+				<option>2017</option>
+				<option>2018</option>
+				<option>2019</option></select>
+		</div>
+
+		<div class="col-md-2">
+			<label class="control-label">CVV</label> <input type="text"
+				class="form-control">
+		</div>
+	</div>
+	<div class="row" style="margin-left: 70%"> <br/>
+		<label class="control-label">&nbsp;</label>
+		<button class="btn btn-md btn-warning"
+			ng-click="placeOrder(productInfo)">Buy Now</button>
+		&nbsp;&nbsp;
+		<button class="btn btn-md btn-warning"
+			ng-click="acceptedQuotes(); showAcceptedQuotes = 1; pagination();showCheckout = 0">Back</button>
+	</div>
+</div>

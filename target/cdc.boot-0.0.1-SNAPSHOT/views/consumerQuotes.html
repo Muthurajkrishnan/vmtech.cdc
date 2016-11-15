@@ -1,0 +1,98 @@
+<div class="row" ng-if="consumerQuoteList != ''"
+	style="padding-left: 20px; padding-right: 20px; height: 100%; font-family: Helvetica, Arial, serif, Lato; background-image: url('images/pay1.png')">
+	<div class="col-md-12">
+	<table id="cart" class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th style="width: 20%">Product</th>
+				<th style="width: 15%">Price</th>
+				<th style="width: 12%">Quantity</th>
+				<th style="width: 12%">Status</th>
+				<th style="width: 12%">Update</th>
+			</tr>
+		</thead>
+		<tbody
+			ng-repeat="elements in consumerQuoteList | pagination: curPage * pageSize | limitTo: 4">
+			<tr>
+				<td data-th="Product">
+					<div class="row">
+						<div class="col-sm-4 hidden-xs">
+							<img ng-src="images/{{elements.product.productImage}}"
+								width="100%" height="100%" alt="..."
+								class="img-responsive img-rounded" />
+						</div>
+						<div class="col-sm-8">
+							<h4 class="nomargin">{{elements.consumerPriceID}}</h4>
+							<p>{{elements.product.productDescription}}</p>
+						</div>
+					</div>
+				</td>
+				<td data-th="Price"><input type="text"
+					ng-model="elements.userPrice" class="form-control"
+					ng-if="editPrice == true"> <span ng-if="editPrice == false"><i
+						class=" fa fa-inr"> </i> {{elements.userPrice}}</span></td>
+				<td data-th="Quantity"><input type="text"
+					ng-model="elements.productQuantity" class="form-control"
+					ng-if="editPrice == true"> <span ng-if="editPrice == false">{{elements.productQuantity}}</span></td>
+				<td data-th="Status">{{elements.status}}</td>
+				<td class="actions" data-th="">
+					<button class="btn btn-sm btn-warning" ng-click="editPrice = true;">
+						<i class="fa fa-edit"></i>
+					</button>
+					<button class="btn btn-danger btn-sm"
+						ng-click="deleteItemInQuote(elements.consumerPriceID)">
+						<i class="fa fa-trash-o"></i>
+					</button>
+				</td>
+			</tr>
+			<tr ng-if="consumerQuoteList.length-1 == $index">
+				<td class="hidden-xs text-center"></td>
+				<td><a href="#anyHome" data-toggle="tab" id="homeMenu"
+					prevent-default="" scroll-to="anyHome" ng-click="home()"
+					class="btn btn-md btn-warning"><i class="fa fa-angle-left"></i>
+						Continue Shopping</a></td>
+
+				<td><a href="" ng-click="updateQuote()"
+					class="btn btn-md btn-primary">Resubmit Quote <i
+						class="fa fa-angle-right"></i>
+				</a></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="1" class="hidden-xs">
+					<div class="row" ng-if="userQuoteMessage">
+						<label> {{userQuoteMessage}}</label>
+					</div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</div>
+	<div class="row pull-center">
+		<div class="pagination-div" ng-show="consumerQuoteList.length"
+			style="background-color: #f1f1f1; padding-left: 10px;">
+			<ul style="list-style: none;">
+				<li class="col-md-8"></li>
+				<li class="col-md-1">
+					<button type="button" ng-disabled="curPage == 0"
+						class="btn btn-xs btn-warning" style="font-size: 12px;"
+						ng-click="curPage=curPage-1">PREV</button>
+				</li>
+				<li class="col-md-1"><span>Page {{curPage + 1}} of {{
+						numberOfPages(consumerQuoteList)}}</span></li>
+				<li class="col-md-1">
+					<button type="button"
+						ng-disabled="curPage >= consumerQuoteList.length/pageSize - 1"
+						class="btn btn-xs btn-warning" style="font-size: 12px;"
+						ng-click="curPage = curPage+1">NEXT</button>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div ng-if="consumerQuoteList == ''"
+	style="padding-left: 20px; padding-right: 20px; height: 100%; font-family: Helvetica, Arial, serif, Lato; background-image: url('images/pay1.png')">
+	<br /> <label>There are no items in your cart currently.
+		Please continue shopping.</label>
+</div>
