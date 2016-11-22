@@ -10,7 +10,8 @@ public class MongoConfig {
 	private final MongoTemplate mongoTemplate;
 
 	@Autowired
-	    public MongoConfig(MongoTemplate mongoTemplate) {
+	public MongoConfig(MongoTemplate mongoTemplate) {
 	        this.mongoTemplate = mongoTemplate;
+	        System.out.println(this.mongoTemplate);
 	    }
 }

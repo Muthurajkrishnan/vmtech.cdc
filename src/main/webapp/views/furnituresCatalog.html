@@ -1,138 +1,121 @@
-<div class="row">
-	<div style="height: 100%;" ng-repeat="elements in furnitureProductList">
-		<div class="clearfix" ng-if="$index % 2 == 0"></div>
-		<div class="col-md-6" style="padding-right: 0px; padding-left: 0px;"
-			class="electronicsCatalogImageDiv">
-			<img ng-src="images/{{elements.productImage}}"
-				class="electronicsCatalogImage">
-			<!-- Soumya code -->
-			<div>
-				<span class="review-icon" ng-repeat="rating in ratings">{{elements.avgrating}}
-					out of {{rating.max}}
-					<div star-rating rating-value="elements.avgrating" max="rating.max"></div>
-				</span> <span class="review-text pull-left"> <a
-					class="btn btn-sm btn-custom-gold" href="#showReviewItems"
-					data-toggle="tab" id="viewReviewId" prevent-default=""
-					scroll-to="showReviewItems" data-target="#showReviewItems"
-					ng-click="shopElectronicsReview(elements.productid); showReviewItems = 1;">Reviews</a>
-				</span>
+<div class="row" 	style="padding-top: 70px; ">	
+	<div style="height: 100%;"
+		ng-repeat="elements in furnitureProductList | filter : {productItemCategory : searchField}">
 
+		<div class="col-md-4"
+			style="padding-right: 0px; padding-left: 0px; left: 20px; right: 10px; bottom: 5px; height: 100%; padding-bottom: 10px;"
+			class="electronicsCatalogImageDiv">
+			<div class="col-md-10" style="padding-right: 0px; padding-left: 0px;">
+				<img ng-src="images/{{elements.productImage}}"
+					style="border-radius: 10px 10px 0px 0px;"
+					class="electronicsCatalogImage">
 			</div>
-			<!-- ends -->
-			<button
-				class="btn btn-sm btn-custom-gold electronicsCatalogImageDivChild"
-				ng-click="" data-toggle="modal"
-				data-target="#decriptionModal_{{elements.productid}}">
-				<i class=" fa fa-lg fa-info-circle"> </i>
-			</button>
-			<div class="modal fade" id="decriptionModal_{{elements.productid}}"
-				tabindex="-1" role="dialog" aria-labelledby="basicModal"
-				aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content"
-						style="background-color: #53657d; color: white;">
-						<div class="modal-header">
-							<div class="modal-title" id="myModalLabel"
-								style="text-align: center">
-								<div class="col-md-4" style="text-align: left">
-									<b style="margin-left: 5px;">{{elements.productName}}</b>
-								</div>
-								<div class="col-md-8" style="text-align: right;">
-									<b style="margin-right: 5px;"><label>Trending Price
-											Range :</label> <b><i class="fa fa-inr"></i>
-											{{elements.productMinPrice}}</b> - <b><i class="fa fa-inr"></i>
-											{{elements.productMaxPrice}}</b> </b>
-								</div>
-								<br />
-							</div>
-						</div>
-						<div class="modal-body"
-							style="background-color: #53657d; color: white;">
-							<h3>{{elements.productDescription}}</h3>
-							<br /> <br />
-						</div>
-						<div class="modal-footer"
-							style="background-color: white; border-radius: 0px 0px 10px 10px;">
-							<div class="row">
-								<button class="btn btn-md btn-info" data-dismiss="modal">Ok</button>
-							</div>
-						</div>
+			<div class="col-md-10"
+				style="background-color: #f5f5f5; border-radius: 0px 0px 10px 10px; color: #232f3e; padding-right: 0px; padding-left: 0px; height: 100px; background: -webkit-linear-gradient(white, #d6d6d6); background: -o-linear-gradient(white, #d6d6d6); background: -moz-linear-gradient(white, #d6d6d6); background: linear-gradient(white, #d6d6d6);">
+				<div class="row">
+					<div class="col-md-8">
+						<b>{{elements.productName}} <small> by
+								{{elements.productBrand}}</small>
+						</b>
+					</div>
+					<div class="col-md-4">
+						<small>Available Qty:</small> {{elements.productAvailableQty}}
 					</div>
 				</div>
-			</div>
-			<button
-				class="btn btn-sm btn-custom-gold electronicsCatalogImageDivChildPrice"
-				ng-click="" data-toggle="modal"
-				data-target="#productPrice_{{elements.productid}}">
-				<b>Quote</b>&nbsp;&nbsp;<i class="fa fa-md fa-inr"> </i>
-			</button>
-			<div class="modal fade" id="productPrice_{{elements.productid}}"
-				tabindex="-1" role="dialog" aria-labelledby="basicModal"
-				aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content"
-						style="background-color: #53657d; color: white;">
-						<div class="modal-header">
-							<div class="modal-title" id="myModalLabel"
-								style="text-align: center">
-								<div class="col-md-4" style="text-align: left">
-									<b style="margin-left: 5px;">{{elements.productName}}</b>
-								</div>
-								<div class="col-md-8" style="text-align: right;">
-									<b style="margin-right: 5px;"><b><i class="fa fa-inr"></i>
-											{{elements.productMinPrice}}</b> - <b><i class="fa fa-inr"></i>
-											{{elements.productMaxPrice}}</b></b>
-								</div>
-								<br />
-							</div>
-						</div>
-						<div class="modal-body"
+				<div>
+					<b style="">{{elements.productDescription}}</b>
+
+				</div>
+				<div style="">
+					<span class="review-icon" ng-show="elements.avgrating"
+						ng-repeat="rating in ratings">{{elements.avgrating}} out of
+						{{rating.max}}
+						<div star-rating rating-value="elements.avgrating" readonly="true"
+							max="rating.max"></div>
+					</span> <span class="review-text pull-left" ng-show="elements.avgrating">
+						<a class="btn btn-sm btn-custom-red" href="#showReviewItems"
+						data-toggle="tab" id="viewReviewId" prevent-default=""
+						scroll-to="showReviewItems" data-target="#showReviewItems"
+						ng-click="shopElectronicsReview(elements.productid); showReviewItems = 1;">Reviews</a>
+					</span>
+				</div>
+				<!-- ends -->
+				<button
+					class="btn btn-sm btn-custom-red electronicsCatalogImageDivChildPrice"
+					ng-click="" data-toggle="modal"
+					data-target="#productPrice_{{elements.productid}}">
+					<b>Quote</b>&nbsp;&nbsp;<i class="fa fa-md fa-inr"> </i>
+				</button>
+				<div class="modal fade" id="productPrice_{{elements.productid}}"
+					tabindex="-1" role="dialog" aria-labelledby="basicModal"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content"
 							style="background-color: #53657d; color: white;">
-							<div class="row">
-								<div class="col-md-4">
-									<label class="control-label">Quote your price</label>
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-inr fa"></i></span>
-										<input type="text" class="form-control" required="required"
-											ng-model="parent.priceQuote"
-											ng-change="successRateCheck(); successRate = 1;">
+							<div class="modal-header">
+								<div class="modal-title" id="myModalLabel"
+									style="text-align: center">
+									<div class="col-md-4" style="text-align: left">
+										<b style="margin-left: 5px;">{{elements.productName}}</b>
+									</div>
+									<div class="col-md-8" style="text-align: right;">
+										<b style="margin-right: 5px;"><b><i class="fa fa-inr"></i>
+												{{elements.productMinPrice}}</b> - <b><i class="fa fa-inr"></i>
+												{{elements.productMaxPrice}}</b></b>
+									</div>
+									<br />
+								</div>
+							</div>
+							<div class="modal-body"
+								style="background-color: #53657d; color: white;">
+								<div class="row">
+									<div class="col-md-4">
+										<label class="control-label">Quote your price</label>
+										<div class="input-group">
+											<span class="input-group-addon"><i
+												class="fa fa-inr fa"></i></span> <input type="text"
+												class="form-control" required="required"
+												ng-model="parent.priceQuote"
+												ng-change="successRateCheck(); successRate = 1;">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<label class="control-label">Quantity</label> <input
+											type="text" class="form-control" required="required"
+											ng-model="parent.quantity">
+									</div>
+									<div class="col-md-3">
+										<label class="control-label">Product Review </label><br /> <label>
+											<span class="fa fa-star" style="color: yellow"></span><span
+											class="fa fa-star" style="color: yellow"></span><span
+											class="fa fa-star" style="color: yellow"></span><span
+											class="fa fa-star" style="color: yellow"></span>
+										</label>
+									</div>
+									<div class="col-md-3">
+										<label class="control-label"
+											ng-show="successRate == 1 && parent.priceQuote > 0">Success
+											rate </label><br /> <label
+											ng-show="successRate == 1 && parent.priceQuote > 0">
+											{{successRatePer}}% </label>
 									</div>
 								</div>
-								<div class="col-md-2">
-									<label class="control-label">Quantity</label> <input
-										type="text" class="form-control" required="required"
-										ng-model="parent.quantity">
-								</div>
-								<div class="col-md-4">
-									<label class="control-label">Product Review </label><br /> <label>
-										<span class="fa fa-star" style="color: yellow"></span><span
-										class="fa fa-star" style="color: yellow"></span><span
-										class="fa fa-star" style="color: yellow"></span><span
-										class="fa fa-star" style="color: yellow"></span>
-									</label>
-								</div>
-								<div class="col-md-4">
-									<label class="control-label"
-										ng-show="successRate == 1 && parent.priceQuote > 0">Success
-										rate </label><br /> <label
-										ng-show="successRate == 1 && parent.priceQuote > 0">
-										{{successRatePer}}% </label>
-								</div>
 							</div>
-						</div>
-						<div class="modal-footer"
-							style="background-color: white; border-radius: 0px 0px 10px 10px;">
-							<div class="row">
-								<button class="btn btn-md btn-info"
-									ng-click="submitQuote(elements.productid)" data-dismiss="modal">Submit</button>
-								&nbsp;
-								<button class="btn btn-md btn-info" data-dismiss="modal">Cancel</button>
-							</div>
-							<div class="row" ng-if="parent.userMessage">
-								<label> {{parent.userMessage}}</label><br />
-								<button class="btn btn-md btn-info" ng-show="parent.userMessage"
-									ng-click="successRate = 0;" data-dismiss="modal"
-									ng-click="parent.userMessage = null">OK</button>
+							<div class="modal-footer"
+								style="background-color: white; border-radius: 0px 0px 10px 10px;">
+								<div class="row">
+									<button class="btn btn-md btn-info"
+										ng-click="submitQuote(elements.productid)"
+										data-dismiss="modal">Submit</button>
+									&nbsp;
+									<button class="btn btn-md btn-info" data-dismiss="modal">Cancel</button>
+								</div>
+								<div class="row" ng-if="parent.userMessage">
+									<label> {{parent.userMessage}}</label><br />
+									<button class="btn btn-md btn-info"
+										ng-show="parent.userMessage" ng-click="successRate = 0;"
+										data-dismiss="modal" ng-click="parent.userMessage = null">OK</button>
+								</div>
 							</div>
 						</div>
 					</div>

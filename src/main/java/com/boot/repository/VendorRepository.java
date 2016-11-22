@@ -15,5 +15,6 @@ public interface VendorRepository extends JpaRepository<Vendor, Long> {
 
 	@Query(value = "SELECT * FROM vendor ve where ve.vendor_email = :vendorEmail", nativeQuery = true)
 	public List<Vendor> getVendorInfoByVendorEmail(@Param("vendorEmail") String vendorEmail);
+	
 
 }

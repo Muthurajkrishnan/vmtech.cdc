@@ -27,7 +27,7 @@
 				<h1 class="rating-num">{{electronicProductReviewList[0].product.avgrating}}</h1>
 				<div class="rating">
 					<div ng-repeat="demo in avgPseudoRatingList">
-						<div star-rating rating-value="demo.avgrate" max="5"></div>
+						<div star-rating rating-value="demo.avgrate" max="5" readonly="true"></div>
 					</div>
 					<!-- <span>
 					<input type="text" placeholder="avgRating" ng-model="avgRating">
@@ -120,7 +120,7 @@
 					<span class="pull-left" style="padding-left: 5px"> <strong>{{reviewlist.reviewtitle}}</strong>
 					</span> <span>
 						<div class="customstar" star-rating
-							rating-value="reviewlist.rating" max="5"></div>
+							rating-value="reviewlist.rating" readonly="true" max="5"></div>
 					</span>
 				</div>
 				<div id="reviewDivider"></div>

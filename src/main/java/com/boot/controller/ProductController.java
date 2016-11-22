@@ -54,11 +54,21 @@ public class ProductController {
 		return productService.productAnalyzer(category, subcategory);
 	}
 	
-	@RequestMapping(value = "/listProducts", method = RequestMethod.GET)
-	private java.util.List<Product> listProducts() {
-		System.out.println("List all");
-		return productRepository.findAll();
+	@RequestMapping(value = "/getProductList", method = RequestMethod.GET)
+	private java.util.List<Product> getProductList() {
+		return productRepository.findAllByGroup();
 	}
+	
+	@RequestMapping(value = "/findAllByPartialSearch", method = RequestMethod.GET)
+	private java.util.List<Product> findAllByPartialSearch(@RequestParam("partialSearchText") String partialSearchText) {
+		return productRepository.findAllByPartialSearch(partialSearchText);
+	}
+	
+//	@RequestMapping(value = "/listProducts", method = RequestMethod.GET)
+//	private java.util.List<Product> listProducts() {
+//		System.out.println("List all");
+//		return productRepository.findAll();
+//	}
 
 	@RequestMapping(value = "saveProducts", method = RequestMethod.POST)
 	private Product saveProducts(@RequestBody Product product) {

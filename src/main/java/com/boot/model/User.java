@@ -1,11 +1,14 @@
 package com.boot.model;
 
-import java.util.ArrayList;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class User {
@@ -25,6 +28,11 @@ public class User {
 	private String userCountry;
 	private String zipCode;
 	private String userPhonenumber;
+	
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date_created")
+	private java.util.Date dateCreated ;
 	
 	public String getUserPhonenumber() {
 		return userPhonenumber;
@@ -112,6 +120,11 @@ public class User {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	
+	public java.util.Date getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(java.util.Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 
 }

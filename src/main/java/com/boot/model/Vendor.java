@@ -3,11 +3,16 @@ package com.boot.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 //@Document(collection = "vendor")
@@ -22,6 +27,10 @@ public class Vendor {
 	private int vendorRating;
 	private String vendorType;
 	private String vendorStatus;
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date_created")
+	private java.util.Date dateCreated ;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Product product;
@@ -88,6 +97,14 @@ public class Vendor {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public java.util.Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(java.util.Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
 }

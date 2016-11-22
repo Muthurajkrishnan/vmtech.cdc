@@ -1,0 +1,77 @@
+<div class="row"
+	style="padding-left: 20px; padding-right: 20px; height: 100%; font-family: Helvetica, Arial, serif, Lato; background-image: url('images/pay1.png')">
+	<table id="cart" ng-show="cartCount > 0"
+		class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th style="width: 40%">Product</th>
+				<th style="width: 15%">Price</th>
+				<th style="width: 12%">Days</th>
+				<th style="width: 12%">Hours</th>
+				<th style="width: 12%">Status</th>
+				<th style="width: 12%">Update</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="elements in consumerServiceCartList">
+				<td data-th="Product">
+					<div class="row">
+						<div class="col-sm-4 hidden-xs">
+							<img ng-src="images/{{elements.product.productImage}}" width="100%"
+								height="100%" alt="..." class="img-responsive img-rounded" />
+						</div>
+						<div class="col-sm-8">
+							<h4 class="nomargin">{{elements.consumerPriceID}}</h4>
+							<p>{{elements.product.productDescription}}</p>
+						</div>
+					</div>
+				</td>
+				<td data-th="Price"><input type="text"
+					ng-model="elements.userPrice" class="form-control"
+					ng-if="editPrice == true"> <span ng-if="editPrice == false"><i
+						class=" fa fa-inr"> </i> {{elements.userPrice}}</span></td>
+				<td data-th="Days"><input type="text"
+					ng-model="elements.productQuantity" class="form-control"
+					ng-if="editPrice == true"> <span ng-if="editPrice == false">{{elements.days}}</span></td>
+					
+				<td data-th="Hours"><input type="text"
+					ng-model="elements.productQuantity" class="form-control"
+					ng-if="editPrice == true"> <span ng-if="editPrice == false">{{elements.hours}}</span></td>
+					
+					
+				<td data-th="Status">{{elements.status}}</td>
+				<td class="actions" data-th="">
+					<button class="btn btn-info btn-sm" ng-click="editPrice = true;">
+						<i class="fa fa-edit"></i>
+					</button>
+					<button class="btn btn-danger btn-sm" ng-click="deleteServiceCart(elements.consumerPriceID)">
+						<i class="fa fa-trash-o"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="1" class="hidden-xs">
+					<div class="row" ng-if="userQuoteMessage">
+						<label> {{userQuoteMessage}}</label>
+					</div>
+				</td>
+				<td class="hidden-xs text-center"></td>
+				<td><a href="#anyHome" data-toggle="tab" id="homeMenu"
+					prevent-default="" scroll-to="anyHome" ng-click="home()"
+					class="btn btn-md btn-warning"><i class="fa fa-angle-left"></i>
+						Continue Shopping</a></td>
+
+				<td><a href="" ng-click="placeServiceQuote()"
+					class="btn btn-md btn-primary">Submit Quote <i
+						class="fa fa-angle-right"></i>
+				</a></td>
+			</tr>
+		</tfoot>
+	</table>
+	<div ng-show="cartCount == 0" style="height: 100%">
+		<br /> <label>There are no items in your cart currently.
+			Please continue shopping.</label>
+	</div>
+</div>

@@ -1,0 +1,96 @@
+<div class="row" ng-if="vendorAcceptedServiceQuotesList != ''"
+	style="padding-left: 20px; padding-right: 20px; height: 100%; font-family: Helvetica, Arial, serif, Lato; background-image: url('images/pay1.png')">
+	<table id="tableForAll" class="table table-hover table-condensed ">
+		<thead>
+			<tr>
+				<th style="width: 40%">Product</th>
+				<th style="width: 15%">Price</th>
+				<th style="width: 10%">Days</th>
+				<th style="width: 10%">Hours</th>
+				<th style="width: 10%">Status</th>
+				<th style="width: 12%">Action</th>
+			</tr>
+		</thead>
+		<tbody
+			ng-repeat="elements in vendorAcceptedServiceQuotesList | pagination: curPage * pageSize | limitTo: 4">
+			<tr>
+				<td data-th="Product">
+					<div class="row">
+						<div class="col-sm-4 hidden-xs">
+							<img ng-src="images/{{elements.product.productImage}}"
+								width="100%" height="100%" alt="..."
+								class="img-responsive img-rounded" />
+						</div>
+						<div class="col-sm-8">
+							<h4 class="nomargin">{{elements.consumerPriceID}}</h4>
+							<p>{{elements.product.productDescription}}</p>
+						</div>
+					</div>
+				</td>
+				<td data-th="Price"><input type="text"
+					ng-model="elements.userPrice" class="form-control"
+					ng-if="editPrice == true"> <span ng-if="editPrice == false"><i
+						class=" fa fa-inr"> </i> {{elements.userPrice}}</span></td>
+				<td data-th="Days"><input type="text"
+					ng-model="elements.days" class="form-control"
+					ng-if="editPrice == true"> <span ng-if="editPrice == false">{{elements.days}}</span></td>
+				<td data-th="Hours"><input type="text"
+					ng-model="elements.hours" class="form-control"
+					ng-if="editPrice == true"> <span ng-if="editPrice == false">{{elements.hours}}</span></td>
+				<td data-th="Status">{{elements.status}}</td>
+				
+				<td><a href="" ng-click="checkoutService(elements); showCheckout = 1"
+					class="btn btn-md btn-primary">Check out <i
+						class="fa fa-angle-right"></i>
+				</a></td>
+			</tr>
+			<tr ng-if="vendorAcceptedServiceQuotesList.length-1 == $index">
+				<td class="hidden-xs text-center"></td>
+				<td><a href="#anyHome" data-toggle="tab" id="homeMenu"
+					prevent-default="" scroll-to="anyHome" ng-click="home()"
+					class="btn btn-md btn-warning"><i class="fa fa-angle-left"></i>
+						Continue Shopping</a></td>
+				<td><a href="" ng-click="checkoutAll()"
+					class="btn btn-md btn-primary">Check out all <i
+						class="fa fa-angle-right"></i>
+				</a></td>
+
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="1" class="hidden-xs">
+					<div class="row" ng-if="userQuoteMessage">
+						<label> {{userQuoteMessage}}</label>
+					</div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div class="row pull-center">
+			<div class="pagination-div" ng-show="vendorAcceptedServiceQuotesList.length"
+				style="background-color: #f1f1f1; padding-left: 10px;">
+				<ul style="list-style: none;">
+					<li class="col-md-8"></li>
+					<li class="col-md-1">
+						<button type="button" ng-disabled="curPage == 0"
+							class="btn btn-xs btn-warning" style="font-size: 12px;"
+							ng-click="curPage=curPage-1">PREV</button>
+					</li>
+					<li class="col-md-1"><span>Page {{curPage + 1}} of {{
+							numberOfPages(vendorAcceptedServiceQuotesList)}}</span></li>
+					<li class="col-md-1">
+						<button type="button"
+							ng-disabled="curPage >= vendorAcceptedServiceQuotesList.length/pageSize - 1"
+							class="btn btn-xs btn-warning" style="font-size: 12px;"
+							ng-click="curPage = curPage+1">NEXT</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+</div>
+<div ng-if="vendorAcceptedServiceQuotesList == ''"
+	style="padding-left: 20px; padding-right: 20px; height: 100%; font-family: Helvetica, Arial, serif, Lato; background-image: url('images/pay1.png')">
+	<br /> <br />
+	<h4>There are no items.Please continue shopping.</h4>
+</div>

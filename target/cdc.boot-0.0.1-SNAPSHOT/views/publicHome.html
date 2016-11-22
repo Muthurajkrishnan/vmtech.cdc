@@ -1,27 +1,92 @@
 <div class="row"
-	style="background-image: url('images/focusBG.jpg'); background-size: cover; width: 100%; height: 100%; margin: 0px;">
-	<div class="row"
-		style="height: 100%; padding-top: 10%; padding-left: 5%; margin: 0px;">
+	style="background-image: url('images/focusBG.jpg'); font-family: Helvetica, Arial, serif, Lato; background-size: cover; width: 100%; height: 100%; margin: 0px; ">
+	<div class="row" style="text-align: center">
 		<div class="col-md-2"></div>
-		<div class="col-md-8 pull-center" style="text-align: center;">
-			<h2>Welcome to Consumer Driven commerce!! Wassup today..</h2>
-			<label style="color: red">{{searchMessage}}</label>
-			<input type="text" class="form-control" id="input.suggest" list="input.suggest-datalist" placeholder="Eg: I would like to buy a mobile, car, clothing"><br>
-			<button type="submit" class="btn btn-lg btn-custom-red"
-				ng-click="shopIt()">Shop!!</button>
-			<datalist id="input.suggest-datalist">
-				<option value="I would like to shop Gadgets">
-				<option value="I would like to shop Furnitures">
-				<option value="I would like to shop Car Accessories">
-				<option value="I would like to shop Bike Accessories">
-				<option value="I would like to shop Baby Products">
-				<option value="I would like to shop Beauty Products">
-				<option value="I would like to shop Clothing and Accessories">
-				<option value="I would like to shop Health and Personal care">
-			</datalist>
+		<div class="col-md-8">
+			<h3 id="">Welcome to Consumer Driven Commerce!!</h3>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
+	<div class="row" ng-if="loginCheck == 0"
+		style="padding-top: 1%; margin: 0px; padding-left: 14%">
+		<div class="col-md-3" >
+			<div class="round-button">
+				<div class="round-button-circle">
+					<a href="" ng-click="setSuggester('products')" id="products"> <i
+						class="fa fa-user text-center"> </i><br /> <br />Buy <br />Products
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3" >
+			<div class="round-button">
+				<div class="round-button-circle" style="background-color: #008081">
+					<a href="" ng-click="setSuggester('vendor')" id="vendor"> <i
+						class="fa fa-user text-center"> </i><br /> <br />Product <br />Vendor
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3" >
+			<div class="round-button">
+				<div class="round-button-circle" style="background-color: #5a3b4d">
+					<a href="" ng-click="setSuggester('serviceProvider')"
+						id="serviceProvider"> <i class="fa fa-users text-center">
+					</i><br /> <br />Service <br/> Provider
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="round-button">
+				<div class="round-button-circle" style="background-color: #f5a623">
+					<a href="" ng-click="setSuggester('availServices')"
+						id="availServices"> <i class="fa fa-user text-center"> </i><br />
+						<br />Avail <br />Services
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row"
+		style="padding-top: 3%; padding-left: 5%; margin: 0px;">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 pull-center" style="text-align: center;"
+			ng-if="defaultSearch == 1">
+			<label style="color: red; font-size: 20px;">{{searchMessage}}</label>
+			<div
+				style="background-color: #1f4e74; border-radius: 5px 5px 0px 0px; font-size: 15px; padding-top: 5px; color: white; height: 30px;">
+				<b> {{suggestionText}}</b>
+			</div>
+			<autocomplete ng-model="result"
+				attr-placeholder="{{placeholderText}}" click-activation="true"
+				data="dataString" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
+			<!-- <input
+				type="text" class="form-control" id="input.suggest"
+				list="input.suggest-datalist" placeholder="{{placeholderText}}"> -->
+			<br>
 
+			<button type="submit" class="btn btn-lg btn-custom-red"
+				ng-click="getProductsServices(result)">
+				<i class="fa fa-search"></i>
+			</button>
 
+		</div>
+		<div class="col-md-8 row pull-center" style="padding-left: 12%;">
+			<div class="col-md-12"
+				ng-if="defaultSearch == 0 && vendorCheck == 1 || serviceProviderCheck == 1">
+				<button type="submit" class="btn btn-lg btn-custom-red"
+					data-toggle="modal" role="button" data-target="#login">
+					<span class="glyphicon glyphicon-log-in"></span>Please Login to
+					proceed
+				</button>
+				&nbsp;&nbsp; <label>OR</label> &nbsp;&nbsp;
+				<button type="submit" class="btn btn-lg btn-custom-red"
+					data-toggle="modal" role="button" data-target="#signup">
+					<span class="glyphicon glyphicon-user"></span>Click here to Signup
+				</button>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
 </div>

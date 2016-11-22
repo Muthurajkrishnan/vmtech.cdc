@@ -20,12 +20,14 @@ public class PersistenceConfiguration {
 	@ConfigurationProperties(prefix="spring.datasource")
 	@Primary
 	public DataSource dataSource(){
+		System.out.println("defaultDBdataSource");
 		return DataSourceBuilder.create().build();
 	}
 	
 	@Bean
 	@ConfigurationProperties(prefix="spring.data.mongodb")
 	public DataSource mongoDBdataSource(){
+		System.out.println("mongoDBdataSource");
 		return DataSourceBuilder.create().build();
 	}
 

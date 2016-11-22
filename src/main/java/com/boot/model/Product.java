@@ -3,15 +3,19 @@ package com.boot.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-//@Document(collection = "product")
+// @Document(collection = "product")
 public class Product {
 
 	@Id
@@ -26,9 +30,16 @@ public class Product {
 	private long productMaxPrice;
 	private String productCategory;
 	private String productSubCategory;
+	private String productItemCategory;
+	private String productBrand;
+	private String productVersion;
 	private long productAvailableQty;
 	private String productImage;
 	private int avgrating;
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date_created")
+	private java.util.Date dateCreated;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Vendor> listVendor;
@@ -58,7 +69,6 @@ public class Product {
 	public void setProductCategory(String productCategory) {
 		this.productCategory = productCategory;
 	}
-
 
 	public long getProductid() {
 		return productid;
@@ -148,5 +158,36 @@ public class Product {
 		this.listVendor = listVendor;
 	}
 
+	public java.util.Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(java.util.Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public String getProductItemCategory() {
+		return productItemCategory;
+	}
+
+	public void setProductItemCategory(String productItemCategory) {
+		this.productItemCategory = productItemCategory;
+	}
+
+	public String getProductBrand() {
+		return productBrand;
+	}
+
+	public void setProductBrand(String productBrand) {
+		this.productBrand = productBrand;
+	}
+
+	public String getProductVersion() {
+		return productVersion;
+	}
+
+	public void setProductVersion(String productVersion) {
+		this.productVersion = productVersion;
+	}
 
 }

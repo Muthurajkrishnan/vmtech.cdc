@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.boot.model.AutoSuggestion;
 import com.boot.model.ConsumerPrice;
 import com.boot.model.User;
 import com.boot.model.Vendor;
+import com.boot.repository.AutoSuggestionRepository;
 import com.boot.repository.ConsumerPriceRepository;
 import com.boot.repository.ProductRepository;
 import com.boot.repository.ProductReviewRepository;
@@ -30,6 +32,10 @@ public class ConsumerController {
 	UserService userService = new UserService();
 	com.boot.service.ConsumerService consumerService = new com.boot.service.ConsumerService();
 	VendorService vendorService = new VendorService();
+	
+	@Autowired
+	private AutoSuggestionRepository autoSuggestionRepository;
+	
 	@Autowired
 	private UserRepository userRepository;
 
@@ -38,6 +44,9 @@ public class ConsumerController {
 
 	@Autowired
 	private ConsumerPriceRepository consumerPriceRepository;
+	
+	@Autowired
+	MongoTemplate mongoTemplate;
 
 	@Autowired
 	private ProductRepository productRepository;
@@ -51,7 +60,7 @@ public class ConsumerController {
 			@RequestParam("vendorLocation") String vendorLocation, @RequestParam("serviceType") String serviceType,
 			@RequestParam("proser") String proser, User user) {
 		ArrayList<User> listUser = userService.saveUser(userEmail, userName, userPassword, vendorLocation, serviceType,
-				proser, user, userRepository, vendorRepository, productRepository);
+				proser, user, userRepository, vendorRepository, productRepository, mongoTemplate);
 		return listUser;
 	}
 
@@ -67,8 +76,12 @@ public class ConsumerController {
 		return listUser;
 	}
 	
+	@RequestMapping(value = "/getSuggestion", method = RequestMethod.GET)
+	public List<AutoSuggestion> getSuggestion() {
+		return autoSuggestionRepository.findAll();
+	}
+	
 	@RequestMapping(value = "/getProfile", method = RequestMethod.GET)
-	@CrossOrigin
 	public User getProfile(@RequestParam("userEmail") String userEmail, User user) {
 		return userService.getProfile(userEmail, user, userRepository);
 	}

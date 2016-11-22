@@ -2,10 +2,15 @@ package com.boot.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 //@Document(collection = "consumer")
@@ -17,6 +22,11 @@ public class Consumer {
 	private String consumerEmail;
 	private String consumerPassword;
 	private String consumerCardInfo;
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date_created")
+	private java.util.Date dateCreated ;
+	
 	ArrayList<Product> consumerPurchaseHistory;
 	
 	public Consumer(){}
@@ -57,5 +67,13 @@ public class Consumer {
 	}
 	public void setConsumerPurchaseHistory(ArrayList<Product> consumerPurchaseHistory) {
 		this.consumerPurchaseHistory = consumerPurchaseHistory;
+	}
+
+	public java.util.Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(java.util.Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 }	

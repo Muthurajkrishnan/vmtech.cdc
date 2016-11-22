@@ -3,12 +3,17 @@ package com.boot.model;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name="CONSUMER_PRICE")
@@ -29,6 +34,10 @@ public class ConsumerPrice implements java.io.Serializable {
 	private String status;
 	private int productQuantity;
 	private String vendorid;
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date_created")
+	private java.util.Date dateCreated ;
 	//String productid;
 		
 	public String getRejectReason() {
@@ -150,5 +159,13 @@ public class ConsumerPrice implements java.io.Serializable {
 
 	public void setDateOrder(java.util.Date dateOrder) {
 		this.dateOrder = dateOrder;
+	}
+
+	public java.util.Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(java.util.Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 }

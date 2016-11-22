@@ -1,0 +1,166 @@
+<div class="row"
+	style="background-color: #f5f5f5; padding-left: 20px; padding-right: 20px; height: 100%; font-family: Helvetica, Arial, serif, Lato; background-image: url('images/pay1.png')">
+	<div class="col-md-12 ReviewsImageDiv" style="text-align: center; background-color: #f5f5f5;  ">
+		<label class="control-label">Please narrow your search - </label> <select
+			ng-model="selectedCategory"
+			ng-change="selectVendor(selectedCategory)" class="form-control" ng-model="catselected">
+			<option value="">---Select Category---</option>
+			<option ng-repeat="elements in serviceCategories"
+				value="{{elements.productSubCategory}}">{{elements.productSubCategory}}</option>
+		</select>
+	</div>
+	<hr>
+	<div ng-if="showServices == 1">
+		<table class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th style="width: 15%">Service</th>
+					<th style="width: 15%">Service Description</th>
+					<th style="width: 15%">Service Name</th>
+					<th style="width: 10%">Rating</th>
+					<th style="width: 15%">Vendor Location</th>
+					<th style="width: 15%">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="elements in serviceVendor" style="line-height: 10%">
+
+					<td>
+						<div class="row">
+							<img ng-src="images/{{elements.product.productImage}}"
+								width="60%" height="60%" alt="..."
+								class="img-responsive img-rounded" />
+						</div>
+					</td>
+
+					<!-- <td data-th="productid">{{elements.product.productid}}
+					</td> -->
+					<td data-th="productName">{{elements.product.productDescription}}
+					</td>
+
+					<td data-th="productName">{{elements.product.productName}}</td>
+					<td>
+						<div class="row" ng-if="elements.vendorRating == 0">
+							<div class="col-sm-8">
+								<label></label>
+							</div>
+						</div>
+						<div class="row" ng-if="elements.vendorRating != 0">
+							<div class="col-sm-8">
+								<label>{{elements.vendorRating}}</label>
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="row">
+							<div class="col-sm-8" ng-show="elements.vendorLocation != null">
+								<label>{{elements.vendorLocation}}</label>
+							</div>
+						</div>
+					</td>
+					<!-- <td><div class="row">
+													<button class="btn btn-md btn-info"
+														ng-click="updateReviews(elements.reviewId)"
+														data-dismiss="modal">Create Quote</button>													
+												</div></td> -->
+
+
+					<td>
+
+						<div>
+							<button class="btn btn-sm btn-custom-gold" ng-click=""
+								data-toggle="modal"
+								data-target="#productPrice_{{elements.product.productid}}">
+								<b>Quote</b>&nbsp;&nbsp;<i class="fa fa-md fa-inr"> </i>
+							</button>
+						</div>
+						<div class="modal fade"
+							id="productPrice_{{elements.product.productid}}" tabindex="-1"
+							role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content"
+									style="background-color: #53657d; color: white;">
+									<div class="modal-header">
+										<div class="modal-title" id="myModalLabel"
+											style="text-align: center">
+											<div class="col-md-4" style="text-align: left">
+												<b style="margin-left: 5px;">{{elements.product.productName}}</b>
+											</div>
+											<div class="col-md-8" style="text-align: right;">
+												<b style="margin-right: 5px;"><b><i
+														class="fa fa-inr"></i>
+														{{elements.product.productMinPrice}}</b> - <b><i
+														class="fa fa-inr"></i>
+														{{elements.product.productMaxPrice}}</b></b>
+											</div>
+											<br />
+										</div>
+									</div>
+									<div class="modal-body"
+										style="background-color: #53657d; color: white;">
+										<div class="row">
+											<div class="col-md-4">
+												<label class="control-label">Quote your price</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-inr fa"></i></span> <input type="text"
+														class="form-control" required="required"
+														ng-model="parent.priceQuote"
+														ng-change="successRateCheck(); successRate = 1;">
+												</div>
+											</div>
+											<div class="col-md-2">
+												<label class="control-label">Days</label> <input type="text"
+													class="form-control" required="required"
+													ng-model="parent.days">
+											</div>
+											<div class="col-md-2">
+												<label class="control-label">Hours</label> <input
+													type="text" class="form-control" required="required"
+													ng-model="parent.hours">
+											</div>
+											<div class="col-md-4">
+												<label class="control-label">Service Review </label><br />
+												<label> <span class="fa fa-star"
+													style="color: yellow"></span><span class="fa fa-star"
+													style="color: yellow"></span><span class="fa fa-star"
+													style="color: yellow"></span><span class="fa fa-star"
+													style="color: yellow"></span>
+												</label>
+											</div>
+											<div class="col-md-4">
+												<label class="control-label"
+													ng-show="successRate == 1 && parent.priceQuote > 0">Success
+													rate </label><br /> <label
+													ng-show="successRate == 1 && parent.priceQuote > 0">
+													{{successRatePer}}% </label>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer"
+										style="background-color: white; border-radius: 0px 0px 10px 10px;">
+										<div class="row">
+											<button class="btn btn-md btn-info"
+												ng-click="submitServiceUserQuote(elements.product.productid)"
+												data-dismiss="modal">Submit</button>
+											&nbsp;
+											<button class="btn btn-md btn-info" data-dismiss="modal">Cancel</button>
+										</div>
+										<div class="row" ng-if="parent.userMessage">
+											<label> {{parent.userMessage}}</label><br />
+											<button class="btn btn-md btn-info"
+												ng-show="parent.userMessage" ng-click="successRate = 0;"
+												data-dismiss="modal" ng-click="parent.userMessage = null">OK</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</div>
